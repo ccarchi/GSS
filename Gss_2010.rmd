@@ -1,6 +1,6 @@
 ---
 title: "Social Survey 2010"
-author: "Put your name here!"
+author: "Christopher Carchi!"
 date: "Fall 2018"
 output:
   html_document:
@@ -29,7 +29,7 @@ Use the data from the 2010 general social survey to explore whether belief in co
 
 ```{r}
 alldata <- read.csv(file="gss2010.csv", header=TRUE)
-#names(alldata)
+names(alldata)
 ```
 
 
@@ -40,19 +40,71 @@ alldata <- read.csv(file="gss2010.csv", header=TRUE)
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ```{r}
-barchartGC(~race+condrift, data=alldata, type = "percent") 
+barchartGC(~race+condrift, data=alldata, type ="Percent") 
 ```
+  
+  In the chart above we see that the vast majority of people believe that the continents are moving while there are only a few that disagree with this statement  
 
-
+```{r}
+barchartGC(~race+cappun, data=alldata, type = "Percent")
+```
+  
+  The black people had a different opinion then white poeple and others. The other and white people favor cappun the majority being mostly white people. The black people have a slight majority for opposing the cappun.  
+```{r}
+barchartGC(~cappun+condrift, data=alldata, type = "percent")
+```
+  
+  In the chart above we see that cappun vote that condrift is real and happening. Only a small few dissagree with continental drift.
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+```{r}
+tab =xtabs(~race+condrift, data=alldata)
+rowPerc(tab)
+colPerc(tab)
+```
+  
+  In the chart above we see in a total of 100 people in each race we see that the black people believe that continental drift is true. Same with the white peole but a there is more seen that belive in the white people than the balck people. Other races also belive in condrift.
+
+```{r}
+tab =xtabs(~race+cappun, data=alldata)
+rowPerc(tab)
+colPerc(tab)
+```
+  
+  In the chart above we see that the black people oppose on capital punishemnt and the white people are for capital punishment. It is almost a close 50/50 with all the others races as 56% are for and the other half is against.
+
+```{r}
+tab =xtabs(~cappun+condrift, data=alldata)
+rowPerc(tab)
+colPerc(tab)
+```
+  
+  In the chart above we see that Cappun do believe in condrift witht he majority of the survey saying they agree. In the colums chart we see they still agree with condrift.
 
 ## Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+```{r}
+chisqtestGC(~race+condrift, data=alldata, graph=TRUE)
+```
+  
+  In the chi square chart above we see the same results that all the races agree that condrigt is real and true. Only a small few dont beklive in condrift. In the colums chart we see that, with the small variables, that all races dont believe in condrift.
 
+
+```{r}
+chisqtestGC(~cappun+condrift, data=alldata, graph=TRUE)
+```
+  
+  In the chart abvove we see that the majority of cappun believe that condrift is true. In the coplum chart we see the exact oppisite that it is false.
+
+```{r}
+chisqtestGC(~race+cappun, data=alldata, graph=TRUE)
+```
+  
+  In the table above we see that the majority of all races favor capital punishment. In the colum chartb we see that the black people oppose capital punishment as well as the white people and all the other races.
 # Discussion and Conclusion
+In conclusion we see that in every category of charts that it was pretty onesided. Therev were some data that showed the blacks disagreed with what the white and other races were saying. All the graphs and charts gave a very descriptive analysis on the survey and who agreed with what and who favored what.
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
